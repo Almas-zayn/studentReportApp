@@ -11,7 +11,6 @@ void displayMenu();
 int main() {
     FILE *studentsFile;
     StudentMarkSheet temp;
-    int rollno = 23;
     int i = 0;
 
     studentsFile = fopen("studentsRecord.txt", "r+"); 
