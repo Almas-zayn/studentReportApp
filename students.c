@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include "studentMarkSheet.h"
 
-ClassRecord classRecord = {.students=NULL,.noOfStudents = 0, .noOfStuPassed = 0, .avgOfStudentsPassed = 0};
+ClassRecord classRecord = {.className="Class 9",.students=NULL,.noOfStudents = 0, .noOfStuPassed = 0, .avgOfStudentsPassed = 0};
 
 void displayMenu();
 
@@ -36,28 +36,41 @@ int main() {
         i++;
     }
     char ch;
+    int flag=0;
     while(ch != 'q')
     {
-        displayMenu();
+        displayMenu(flag);
         scanf(" %c",&ch);
+        flag=0;
         switch(ch){
             case '1': printAllStudentsRecord(classRecord);break;
             case '2': addStudent(&classRecord,studentsFile);break;
             case '3': exportStudentReport(classRecord);break;
             case '4': findStudent(classRecord);break;
+            case '5': viewClassReport(&classRecord);break;
+            default : flag=1;break;
         }
     }
     ch = 'p';
+    printf("\n closing the Application .....  :)  \n\n");
     fclose(studentsFile);
     return 0;
 }
-void displayMenu(){
+void displayMenu(int flag){
     system("clear");
-    printf("\n\n     ------>   Student Report   <------     \n\n");
+    printf("\033[1;32m\n\n     ------>   Student Report   <------     \n\n\033[0m");
+
+    // Light Blue Options
+    
     printf("                                 Press q to exit\n\n");
+    printf("\033[1;36m");  // Set light blue (cyan)
     printf("   1. View All Student Reports\n\n");
     printf("   2. Add Student \n\n");
     printf("   3. Export Student Report\n\n");
     printf("   4. Search Student by Roll no\n\n");
+    printf("   5. View Class Report \n\n");
+    printf("\033[0m");
+    if(flag == 1)
+       printf("\033[31m\n           Please enter either 1 , 2, 3, 4, 5 or q \n\n\033[0m");
     printf("           Enter your choice  : ");
 }
